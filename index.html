@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GA4 Event Buttons</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 50px;
+        text-align: center;
+      }
+
+      .button {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 25px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+
+    <!-- Google Tag Manager GA4 gtag.js -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag("js", new Date());
+
+      gtag("config", "G-XXXXXXXXXX"); // Replace with your GA4 Measurement ID
+    </script>
+  </head>
+  <body>
+    <h1>Track GA4 Events with Buttons</h1>
+
+    <button
+      class="button"
+      onclick="sendGA4Event('button_click', 'home_page', 'clicked_button_1')"
+    >
+      Button 1
+    </button>
+    <button
+      class="button"
+      onclick="sendGA4Event('button_click', 'home_page', 'clicked_button_2')"
+    >
+      Button 2
+    </button>
+    <button
+      class="button"
+      onclick="sendGA4Event('button_click', 'pricing_page', 'clicked_button_3')"
+    >
+      Button 3
+    </button>
+
+    <script>
+      function sendGA4Event(eventName, pageName, buttonLabel) {
+        gtag("event", eventName, {
+          page_location: window.location.href,
+          page_title: document.title,
+          page_name: pageName,
+          button_label: buttonLabel,
+          timestamp: new Date().toISOString(),
+        });
+        console.log(
+          `GA4 Event sent: ${eventName}, ${pageName}, ${buttonLabel}`
+        );
+      }
+    </script>
+  </body>
+</html>
